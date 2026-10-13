@@ -8,12 +8,10 @@ CSS halaman profil mahasiswa dipisahkan ke `style.css`. Box Model diterapkan pad
 
 Halaman diperiksa pada beberapa ukuran viewport:
 
-| Ukuran | Hasil |
-| --- | --- |
-| 375px | Layout satu kolom, gambar tampil, tidak ada scroll horizontal. |
-| 767px | Layout tetap satu kolom dan tidak ada scroll horizontal. |
-| 768px | Layout berubah menjadi dua kolom; judul tetap rata tengah. |
-| 1366px | Layout dua kolom, gambar tampil, tidak ada scroll horizontal. |
+- 375px: layout satu kolom, gambar tampil, dan tidak ada scroll horizontal.
+- 767px: layout tetap satu kolom dan tidak ada scroll horizontal.
+- 768px: layout berubah menjadi dua kolom dan judul tetap rata tengah.
+- 1366px: layout dua kolom, gambar tampil, dan tidak ada scroll horizontal.
 
 Perbaikan yang dilakukan: susunan header desktop diubah agar judul tetap rata tengah.
 
