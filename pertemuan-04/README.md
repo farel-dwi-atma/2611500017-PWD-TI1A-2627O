@@ -18,3 +18,7 @@ Perbaikan yang dilakukan: susunan header desktop diubah agar judul tetap rata te
 ## Validasi CSS
 
 `style.css` divalidasi menggunakan [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) pada 13 Oktober 2026. Hasilnya valid, dengan 0 galat dan 0 peringatan. Tidak ada perbaikan tambahan dari hasil validasi.
+
+## URL GitHub
+
+https://github.com/farel-dwi-atma/2611500017-PWD-TI1A-2627O
