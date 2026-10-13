@@ -43,3 +43,5 @@ Pengujian dilakukan di browser pada viewport 375px dan 768px. Hasil aktual dicat
 ## Debugging
 
 Setelah halaman dimuat ulang, JavaScript, CSS, dan gambar berhasil dimuat. Tidak ditemukan error console, error JavaScript, atau request aset yang gagal. Tidak ada perbaikan tambahan setelah pengujian.
+
+Pemeriksaan sintaks `script.js` menggunakan Node.js v22.23.2 juga lulus (`node --check`).
