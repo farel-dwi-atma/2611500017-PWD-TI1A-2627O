@@ -164,33 +164,25 @@ textarea.input-form {
     margin-right: 0.75rem;
 }
 
-.choice-group[aria-invalid="true"],
-.input-form[aria-invalid="true"] {
-    border-color: var(--color-error);
-}
-
-.field-error {
-    min-height: 1.4em;
-    color: var(--color-error);
-}
-
 .form-note {
     margin-bottom: 0.25rem;
     color: #475467;
     font-size: 0.9rem;
 }
 
-.form-feedback {
+.form-feedback,
+.form-feedback-error,
+.form-feedback-success {
     min-height: 1.6em;
     margin: 0 0 0.75rem;
     font-weight: 700;
 }
 
-.form-feedback.is-error {
+.form-feedback-error {
     color: var(--color-error);
 }
 
-.form-feedback.is-success {
+.form-feedback-success {
     color: var(--color-success);
 }
 
@@ -247,7 +239,7 @@ textarea:focus-visible {
         justify-content: center;
     }
 
-    .js nav:not(.is-open) ul {
+    .js nav:not(.nav-open) ul {
         display: none;
     }
 }

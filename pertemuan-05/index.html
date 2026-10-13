@@ -11,9 +11,9 @@
     <header class="site-header">
         <div class="container header-content">
             <h1>Profil Mahasiswa</h1>
-            <button class="nav-toggle" type="button" aria-controls="primary-navigation"
-                aria-expanded="false">Menu</button>
-            <nav id="primary-navigation" aria-label="Navigasi utama">
+            <button class="nav-toggle" id="navToggle" type="button" aria-controls="navMenu"
+                aria-expanded="false" aria-label="Buka navigasi">Menu</button>
+            <nav id="navMenu" aria-label="Navigasi utama">
                 <ul>
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#about">Tentang</a></li>
@@ -54,42 +54,35 @@
                 </a>.
             </p>
 
-            <form id="contact-form" novalidate>
+            <form id="contactForm" novalidate>
                 <div class="form-group">
                     <label for="nama">Nama Mahasiswa</label>
                     <input class="input-form" type="text" id="nama" name="nama"
-                        placeholder="Masukkan nama lengkap" minlength="3" maxlength="50"
-                        aria-describedby="nama-error" required />
-                    <small class="field-error" id="nama-error"></small>
+                        placeholder="Masukkan nama lengkap" minlength="3" maxlength="50" required />
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input class="input-form" type="email" id="email" name="email"
-                        placeholder="nama@email.com" aria-describedby="email-error" required />
-                    <small class="field-error" id="email-error"></small>
+                        placeholder="nama@email.com" required />
                 </div>
 
                 <div class="form-group">
                     <label for="semester">Semester</label>
                     <input class="input-form" type="number" id="semester" name="semester"
-                        min="1" max="14" aria-describedby="semester-error" required />
-                    <small class="field-error" id="semester-error"></small>
+                        min="1" max="14" required />
                 </div>
 
                 <div class="form-group">
                     <label for="tanggal">Tanggal Kunjungan</label>
                     <input class="input-form" type="date" id="tanggal" name="tanggal"
-                        aria-describedby="tanggal-error" required />
-                    <small class="field-error" id="tanggal-error"></small>
+                        required />
                 </div>
 
-                <fieldset class="form-group choice-group" id="jenis-pesan-group"
-                    aria-describedby="jenis-pesan-error">
+                <fieldset class="form-group choice-group">
                     <legend>Jenis Pesan</legend>
                     <label><input type="radio" name="jenis_pesan" value="pertanyaan" required /> Pertanyaan</label>
                     <label><input type="radio" name="jenis_pesan" value="saran" /> Saran</label>
-                    <small class="field-error" id="jenis-pesan-error"></small>
                 </fieldset>
 
                 <fieldset class="form-group choice-group">
@@ -100,25 +93,21 @@
 
                 <div class="form-group">
                     <label for="prodi">Program Studi</label>
-                    <select class="input-form" id="prodi" name="prodi"
-                        aria-describedby="prodi-error" required>
+                    <select class="input-form" id="prodi" name="prodi" required>
                         <option value="">-- Pilih Program Studi --</option>
                         <option value="SI">Sistem Informasi</option>
                         <option value="TI">Teknik Informatika</option>
                     </select>
-                    <small class="field-error" id="prodi-error"></small>
                 </div>
 
                 <div class="form-group">
                     <label for="pesan">Pesan</label>
                     <textarea class="input-form" id="pesan" name="pesan" maxlength="300"
-                        placeholder="Tulis pesan Anda" rows="5"
-                        aria-describedby="pesan-error" required></textarea>
-                    <small class="field-error" id="pesan-error"></small>
+                        placeholder="Tulis pesan Anda" rows="5" required></textarea>
                 </div>
 
                 <p class="form-note">Form ini hanya divalidasi di browser. Data tidak dikirim atau disimpan.</p>
-                <p class="form-feedback" id="form-feedback" role="status" aria-live="polite"></p>
+                <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
 
                 <div class="button-group">
                     <button type="submit">Kirim</button>
