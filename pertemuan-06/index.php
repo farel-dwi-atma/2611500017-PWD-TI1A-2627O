@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Mahasiswa</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <h1>Profil Mahasiswa</h1>
+            <button class="nav-toggle" id="navToggle" type="button" aria-controls="navMenu"
+                aria-expanded="false" aria-label="Buka navigasi">Menu</button>
+            <nav id="navMenu" aria-label="Navigasi utama">
+                <ul>
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-grid">
+        <section id="home" class="panel">
+            <h2>Selamat Datang</h2>
+            <p>Halo, saya Farel Dwi Abdillah. Saya sedang mempelajari Pemrograman Web Dasar.</p>
+            <img class="profile-photo" src="img/foto-profil.jpg"
+                alt="Foto profil Farel Dwi Abdillah" width="175" height="175" />
+        </section>
+
+        <section id="about" class="panel">
+            <h2>Tentang Saya</h2>
+            <article>
+                <h3>Profil Singkat</h3>
+                <p>Saya mahasiswa Program Studi Teknik Informatika.</p>
+                <h3>Target Belajar</h3>
+                <ol>
+                    <li>Memahami struktur HTML5.</li>
+                    <li>Menyusun halaman web semantik.</li>
+                    <li>Memvalidasi dokumen HTML.</li>
+                </ol>
+            </article>
+        </section>
+
+        <section id="contact" class="panel">
+            <h2>Kontak</h2>
+            <p>
+                Kunjungi
+                <a href="https://github.com/farel-dwi-atma/2611500017-PWD-TI1A-2627O">
+                    profil GitHub saya
+                </a>.
+            </p>
+
+            <form id="contactForm" novalidate>
+                <div class="form-group">
+                    <label for="nama">Nama Mahasiswa</label>
+                    <input class="input-form" type="text" id="nama" name="nama"
+                        placeholder="Masukkan nama lengkap" minlength="3" maxlength="50" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="input-form" type="email" id="email" name="email"
+                        placeholder="nama@email.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="semester">Semester</label>
+                    <input class="input-form" type="number" id="semester" name="semester"
+                        min="1" max="14" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="tanggal">Tanggal Kunjungan</label>
+                    <input class="input-form" type="date" id="tanggal" name="tanggal"
+                        required />
+                </div>
+
+                <fieldset class="form-group choice-group">
+                    <legend>Jenis Pesan</legend>
+                    <label><input type="radio" name="jenis_pesan" value="pertanyaan" required /> Pertanyaan</label>
+                    <label><input type="radio" name="jenis_pesan" value="saran" /> Saran</label>
+                </fieldset>
+
+                <fieldset class="form-group choice-group">
+                    <legend>Topik yang Diminati</legend>
+                    <label><input type="checkbox" name="minat" value="HTML" /> HTML</label>
+                    <label><input type="checkbox" name="minat" value="CSS" /> CSS</label>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="prodi">Program Studi</label>
+                    <select class="input-form" id="prodi" name="prodi" required>
+                        <option value="">-- Pilih Program Studi --</option>
+                        <option value="SI">Sistem Informasi</option>
+                        <option value="TI">Teknik Informatika</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pesan">Pesan</label>
+                    <textarea class="input-form" id="pesan" name="pesan" maxlength="300"
+                        placeholder="Tulis pesan Anda" rows="5" required></textarea>
+                </div>
+
+                <p class="form-note">Form ini hanya divalidasi di browser. Data tidak dikirim atau disimpan.</p>
+                <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
+
+                <div class="button-group">
+                    <button type="submit">Kirim</button>
+                    <button class="button-secondary" type="reset">Batal</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Farel Dwi Abdillah [2611500017]</p>
+    </footer>
+</body>
+</html>
