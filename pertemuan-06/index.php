@@ -6,14 +6,6 @@ const NIM_MAHASISWA = '2611500017';
 
 $namaMahasiswa = 'Farel Dwi Abdillah';
 $tahunSekarang = date('Y');
-$semester = 4;
-$ipk = 3.75;
-$aktif = true;
-$topikBelajar = ['HTML', 'CSS', 'PHP'];
-$jumlahTopik = count($topikBelajar);
-$semesterBerikutnya = $semester + 1;
-$progressBelajar = ($semester / 8) * 100;
-$rentangSemesterValid = $semester >= 1 && $semester <= 14;
 
 function e(string $value): string
 {
@@ -22,9 +14,7 @@ function e(string $value): string
 
 function kategoriSemester(int $semester): string
 {
-    if ($semester < 1 || $semester > 14) {
-        return 'Di luar rentang kuliah';
-    } elseif ($semester <= 2) {
+    if ($semester <= 2) {
         return 'Tahap dasar';
     } elseif ($semester <= 6) {
         return 'Tahap pengembangan';
@@ -45,7 +35,7 @@ function namaProgramStudi(string $kode): string
     }
 }
 
-$contohSemester = [0, 1, 4, 7, 15];
+$contohSemester = [1, 4, 7];
 $contohProgram = ['TI', 'SI', 'DKV'];
 $kodeProgram = 'TI';
 $targetBelajar = [
@@ -74,7 +64,7 @@ $targetBelajar = [
                 <ul>
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#about">Tentang</a></li>
-                    <li><a href="#contact">Kontak</a></li>
+                    <li><a href="#github">GitHub</a></li>
                 </ul>
             </nav>
         </div>
@@ -104,37 +94,17 @@ $targetBelajar = [
 
         <section id="data-php" class="panel">
             <h2>Variabel, Tipe Data, dan Operator PHP</h2>
-            <p>Nilai berikut dibuat dan dihitung oleh PHP di sisi peladen.</p>
-            <dl>
-                <dt>Nama (<?= e(get_debug_type($namaMahasiswa)) ?>)</dt>
-                <dd><?= e($namaMahasiswa) ?></dd>
-                <dt>Semester (<?= e(get_debug_type($semester)) ?>)</dt>
-                <dd><?= e((string) $semester) ?></dd>
-                <dt>IPK (<?= e(get_debug_type($ipk)) ?>)</dt>
-                <dd><?= e((string) $ipk) ?></dd>
-                <dt>Status aktif (<?= e(get_debug_type($aktif)) ?>)</dt>
-                <dd><?= $aktif ? 'Ya' : 'Tidak' ?></dd>
-                <dt>Topik belajar (<?= e(get_debug_type($topikBelajar)) ?>)</dt>
-                <dd><?= e(implode(', ', $topikBelajar)) ?></dd>
-                <dt>Operator</dt>
-                <dd>
-                    Ada <?= e((string) $jumlahTopik) ?> topik; semester berikutnya
-                    <?= e((string) $semesterBerikutnya) ?>; progres
-                    <?= e((string) $progressBelajar) ?>%; rentang semester
-                    <?= $rentangSemesterValid ? 'valid' : 'perlu diperiksa' ?>.
-                </dd>
-            </dl>
+            <p>PHP menggunakan variabel, tipe data, dan operator untuk membentuk halaman ini. Nilai variabel dan hasil perhitungannya digunakan di sisi peladen, tidak ditampilkan sebagai daftar data di halaman.</p>
         </section>
 
         <section id="percabangan" class="panel">
             <h2>Percabangan if - elseif - else</h2>
-            <p>PHP mengelompokkan semester ke tahap belajar dan menandai nilai di luar rentang 1 sampai 14.</p>
+            <p>PHP mengelompokkan contoh semester 1 sampai 7 ke tahap belajar.</p>
             <ul>
                 <?php foreach ($contohSemester as $contoh): ?>
                     <li>Semester <?= e((string) $contoh) ?>: <?= e(kategoriSemester($contoh)) ?></li>
                 <?php endforeach; ?>
             </ul>
-            <p>Semester saya saat ini (<?= e((string) $semester) ?>): <?= e(kategoriSemester($semester)) ?>.</p>
         </section>
 
         <section id="switch" class="panel">
@@ -175,80 +145,13 @@ $targetBelajar = [
             </ol>
         </section>
 
-        <section id="contact" class="panel">
-            <h2>Kontak</h2>
-            <p>
-                Kunjungi
-                <a href="https://github.com/farel-dwi-atma/2611500017-PWD-TI1A-2627O">
-                    profil GitHub saya
-                </a>.
-            </p>
-
-            <form id="contactForm" novalidate>
-                <div class="form-group">
-                    <label for="nama">Nama Mahasiswa</label>
-                    <input class="input-form" type="text" id="nama" name="nama"
-                        placeholder="Masukkan nama lengkap" minlength="3" maxlength="50" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="input-form" type="email" id="email" name="email"
-                        placeholder="nama@email.com" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="semester">Semester</label>
-                    <input class="input-form" type="number" id="semester" name="semester"
-                        min="1" max="14" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="tanggal">Tanggal Kunjungan</label>
-                    <input class="input-form" type="date" id="tanggal" name="tanggal"
-                        required />
-                </div>
-
-                <fieldset class="form-group choice-group">
-                    <legend>Jenis Pesan</legend>
-                    <label><input type="radio" name="jenis_pesan" value="pertanyaan" required /> Pertanyaan</label>
-                    <label><input type="radio" name="jenis_pesan" value="saran" /> Saran</label>
-                </fieldset>
-
-                <fieldset class="form-group choice-group">
-                    <legend>Topik yang Diminati</legend>
-                    <label><input type="checkbox" name="minat" value="HTML" /> HTML</label>
-                    <label><input type="checkbox" name="minat" value="CSS" /> CSS</label>
-                </fieldset>
-
-                <div class="form-group">
-                    <label for="prodi">Program Studi</label>
-                    <select class="input-form" id="prodi" name="prodi" required>
-                        <option value="">-- Pilih Program Studi --</option>
-                        <option value="SI">Sistem Informasi</option>
-                        <option value="TI">Teknik Informatika</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="pesan">Pesan</label>
-                    <textarea class="input-form" id="pesan" name="pesan" maxlength="300"
-                        placeholder="Tulis pesan Anda" rows="5" required></textarea>
-                </div>
-
-                <p class="form-note">Form ini hanya memakai validasi sisi browser dari P5. P6 belum mengolah atau menyimpan data form dengan PHP.</p>
-                <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
-
-                <div class="button-group">
-                    <button type="submit">Kirim</button>
-                    <button class="button-secondary" type="reset">Batal</button>
-                </div>
-            </form>
-        </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" id="github">
         <p>&copy; <?= e($tahunSekarang) ?> <?= e($namaMahasiswa) ?> [<?= e(NIM_MAHASISWA) ?>]</p>
+        <a href="https://github.com/farel-dwi-atma/2611500017-PWD-TI1A-2627O">
+            Profil GitHub
+        </a>
     </footer>
 </body>
 </html>

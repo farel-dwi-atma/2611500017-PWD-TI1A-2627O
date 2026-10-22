@@ -6,8 +6,6 @@
     --color-primary: #003366;
     --color-border: #d0d7de;
     --color-surface: #ffffff;
-    --color-error: #b42318;
-    --color-success: #137547;
 }
 
 *,
@@ -113,22 +111,6 @@ nav a:focus-visible {
     color: #1f4e78;
 }
 
-.panel dl {
-    display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
-    gap: 0.4rem 1rem;
-}
-
-.panel dl dt {
-    font-weight: 700;
-}
-
-.panel dl dd {
-    min-width: 0;
-    margin: 0;
-    overflow-wrap: anywhere;
-}
-
 #about ol {
     padding: 0.75rem 2rem;
     border: 1px solid #e6e6e6;
@@ -139,73 +121,6 @@ nav a:focus-visible {
     aspect-ratio: 1;
     border-radius: 50%;
     object-fit: cover;
-}
-
-.form-group {
-    display: grid;
-    gap: 0.35rem;
-    margin: 1rem 0;
-}
-
-.form-group > label,
-.choice-group legend {
-    font-weight: 700;
-}
-
-.input-form {
-    width: 100%;
-    min-height: 2.75rem;
-    padding: 0.6rem;
-    border: 1px solid #94a3b8;
-    border-radius: 0.3rem;
-    background-color: #ffffff;
-    color: #111827;
-    font: inherit;
-}
-
-textarea.input-form {
-    resize: vertical;
-}
-
-.choice-group {
-    padding: 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.3rem;
-}
-
-.choice-group label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    margin-right: 0.75rem;
-}
-
-.form-note {
-    margin-bottom: 0.25rem;
-    color: #475467;
-    font-size: 0.9rem;
-}
-
-.form-feedback,
-.form-feedback-error,
-.form-feedback-success {
-    min-height: 1.6em;
-    margin: 0 0 0.75rem;
-    font-weight: 700;
-}
-
-.form-feedback-error {
-    color: var(--color-error);
-}
-
-.form-feedback-success {
-    color: var(--color-success);
-}
-
-.button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
 }
 
 button {
@@ -224,21 +139,17 @@ button:hover {
     background-color: #1f4e78;
 }
 
-button.button-secondary {
-    background-color: #ffffff;
-    color: var(--color-primary);
-}
-
 a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
+button:focus-visible {
     outline: 3px solid #f0a830;
     outline-offset: 2px;
 }
 
 .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
     margin-top: 1rem;
     padding: 0.75rem 1rem;
     text-align: center;
@@ -246,6 +157,10 @@ textarea:focus-visible {
 
 .site-footer p {
     margin: 0;
+}
+
+.site-footer a {
+    color: #ffffff;
 }
 
 @media (max-width: 767px) {
@@ -264,8 +179,7 @@ textarea:focus-visible {
     .main-grid {
         grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
         grid-template-areas:
-            "home contact"
-            "about contact"
+            "home about"
             "data-php data-php"
             "percabangan switch"
             "perulangan-for perulangan-while";
@@ -280,10 +194,6 @@ textarea:focus-visible {
 
     #about {
         grid-area: about;
-    }
-
-    #contact {
-        grid-area: contact;
     }
 
     #data-php {
