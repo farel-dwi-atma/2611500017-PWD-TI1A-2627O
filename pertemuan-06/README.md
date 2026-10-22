@@ -13,6 +13,7 @@
 - Keluaran teks dinamis di-escape untuk konteks HTML.
 - Form kontak tidak ditampilkan di P6; pemrosesan form tetap menjadi materi P7.
 - Tautan profil GitHub tersedia pada footer di samping informasi hak cipta.
+- Navigasi mobile memakai tombol ikon hamburger tiga garis dengan label aksesibel yang berubah saat menu dibuka atau ditutup.
 - Permintaan favicon yang semula menghasilkan 404 saat pengujian browser diatasi dengan favicon data kosong.
 
 ## Cara Menjalankan
@@ -55,6 +56,7 @@ Pengujian dijalankan pada 22 Oktober 2026 dengan PHP 8.3.33 CLI dan server bawaa
 | Kontak dan GitHub | Form kontak tidak ada pada halaman; tautan profil GitHub tampil pada footer bersama informasi hak cipta. |
 | Biodata mahasiswa | Nama Farel Dwi Abdillah, NIM 2611500017, dan program studi Teknik Informatika tampil pada panel biodata. |
 | Navigasi browser | Tombol Menu membuka navigasi dan menampilkan tautan Beranda, Tentang, dan GitHub; tautan GitHub mengarahkan ke footer. |
+| Tombol hamburger mobile 375 px | Ikon tiga garis terlihat; klik pertama membuka tautan dan mengubah label aksesibel menjadi “Tutup navigasi”; klik berikutnya menutup menu dan mengembalikan label menjadi “Buka navigasi”. |
 
 ### Debugging
 

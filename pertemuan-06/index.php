@@ -59,7 +59,13 @@ $targetBelajar = [
         <div class="container header-content">
             <h1><?= e(JUDUL_HALAMAN) ?></h1>
             <button class="nav-toggle" id="navToggle" type="button" aria-controls="navMenu"
-                aria-expanded="false" aria-label="Buka navigasi">Menu</button>
+                aria-expanded="false" aria-label="Buka navigasi">
+                <span class="hamburger-icon" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
             <nav id="navMenu" aria-label="Navigasi utama">
                 <ul>
                     <li><a href="#home">Beranda</a></li>

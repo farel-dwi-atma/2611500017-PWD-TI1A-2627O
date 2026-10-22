@@ -7,7 +7,6 @@ function setNavigationOpen(isOpen, restoreFocus = false) {
     navMenu.classList.toggle("nav-open", isOpen);
     navToggle.setAttribute("aria-expanded", isOpen);
     navToggle.setAttribute("aria-label", isOpen ? "Tutup navigasi" : "Buka navigasi");
-    navToggle.textContent = isOpen ? "Tutup" : "Menu";
 
     if (restoreFocus) {
         navToggle.focus();
@@ -15,10 +14,8 @@ function setNavigationOpen(isOpen, restoreFocus = false) {
 }
 
 navToggle.addEventListener("click", () => {
-    const isOpen = navMenu.classList.toggle("nav-open");
-    navToggle.setAttribute("aria-expanded", isOpen);
-    navToggle.setAttribute("aria-label", isOpen ? "Tutup navigasi" : "Buka navigasi");
-    navToggle.textContent = isOpen ? "Tutup" : "Menu";
+    const isOpen = navToggle.getAttribute("aria-expanded") !== "true";
+    setNavigationOpen(isOpen);
 });
 
 navMenu.addEventListener("click", (event) => {
