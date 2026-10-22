@@ -6,6 +6,14 @@ const NIM_MAHASISWA = '2611500017';
 
 $namaMahasiswa = 'Farel Dwi Abdillah';
 $tahunSekarang = date('Y');
+$semester = 4;
+$ipk = 3.75;
+$aktif = true;
+$topikBelajar = ['HTML', 'CSS', 'PHP'];
+$jumlahTopik = count($topikBelajar);
+$semesterBerikutnya = $semester + 1;
+$progressBelajar = ($semester / 8) * 100;
+$rentangSemesterValid = $semester >= 1 && $semester <= 14;
 
 function e(string $value): string
 {
@@ -57,6 +65,30 @@ function e(string $value): string
                     <li>Memvalidasi dokumen HTML.</li>
                 </ol>
             </article>
+        </section>
+
+        <section id="data-php" class="panel">
+            <h2>Variabel, Tipe Data, dan Operator PHP</h2>
+            <p>Nilai berikut dibuat dan dihitung oleh PHP di sisi peladen.</p>
+            <dl>
+                <dt>Nama (<?= e(get_debug_type($namaMahasiswa)) ?>)</dt>
+                <dd><?= e($namaMahasiswa) ?></dd>
+                <dt>Semester (<?= e(get_debug_type($semester)) ?>)</dt>
+                <dd><?= e((string) $semester) ?></dd>
+                <dt>IPK (<?= e(get_debug_type($ipk)) ?>)</dt>
+                <dd><?= e((string) $ipk) ?></dd>
+                <dt>Status aktif (<?= e(get_debug_type($aktif)) ?>)</dt>
+                <dd><?= $aktif ? 'Ya' : 'Tidak' ?></dd>
+                <dt>Topik belajar (<?= e(get_debug_type($topikBelajar)) ?>)</dt>
+                <dd><?= e(implode(', ', $topikBelajar)) ?></dd>
+                <dt>Operator</dt>
+                <dd>
+                    Ada <?= e((string) $jumlahTopik) ?> topik; semester berikutnya
+                    <?= e((string) $semesterBerikutnya) ?>; progres
+                    <?= e((string) $progressBelajar) ?>%; rentang semester
+                    <?= $rentangSemesterValid ? 'valid' : 'perlu diperiksa' ?>.
+                </dd>
+            </dl>
         </section>
 
         <section id="contact" class="panel">
