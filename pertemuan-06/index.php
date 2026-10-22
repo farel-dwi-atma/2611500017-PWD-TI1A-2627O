@@ -19,6 +19,21 @@ function e(string $value): string
 {
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
+
+function kategoriSemester(int $semester): string
+{
+    if ($semester < 1 || $semester > 14) {
+        return 'Di luar rentang kuliah';
+    } elseif ($semester <= 2) {
+        return 'Tahap dasar';
+    } elseif ($semester <= 6) {
+        return 'Tahap pengembangan';
+    } else {
+        return 'Tahap lanjutan';
+    }
+}
+
+$contohSemester = [0, 1, 4, 7, 15];
 ?>
 <!doctype html>
 <html lang="id">
@@ -89,6 +104,17 @@ function e(string $value): string
                     <?= $rentangSemesterValid ? 'valid' : 'perlu diperiksa' ?>.
                 </dd>
             </dl>
+        </section>
+
+        <section id="percabangan" class="panel">
+            <h2>Percabangan if - elseif - else</h2>
+            <p>PHP mengelompokkan semester ke tahap belajar dan menandai nilai di luar rentang 1 sampai 14.</p>
+            <ul>
+                <?php foreach ($contohSemester as $contoh): ?>
+                    <li>Semester <?= e((string) $contoh) ?>: <?= e(kategoriSemester($contoh)) ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <p>Semester saya saat ini (<?= e((string) $semester) ?>): <?= e(kategoriSemester($semester)) ?>.</p>
         </section>
 
         <section id="contact" class="panel">
