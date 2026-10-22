@@ -157,6 +157,23 @@ $targetBelajar = [
             </ol>
         </section>
 
+        <section id="perulangan-while" class="panel">
+            <h2>Perulangan while</h2>
+            <p>Penghitung bertambah pada setiap iterasi hingga mencapai tiga latihan.</p>
+            <ol>
+                <?php
+                $pertemuanSaatIni = 1;
+                $jumlahPertemuan = 3;
+                while ($pertemuanSaatIni <= $jumlahPertemuan):
+                ?>
+                    <li>Latihan ke-<?= e((string) $pertemuanSaatIni) ?></li>
+                <?php
+                    $pertemuanSaatIni++;
+                endwhile;
+                ?>
+            </ol>
+        </section>
+
         <section id="contact" class="panel">
             <h2>Kontak</h2>
             <p>
