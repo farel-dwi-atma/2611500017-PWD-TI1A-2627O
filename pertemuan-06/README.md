@@ -1,49 +1,60 @@
-# Pertemuan 5
+# Pertemuan 6 - Dasar Pemrograman PHP
 
 ## Perubahan
 
-- P5 dibuat sebagai salinan artefak P4; berkas P4 tidak diubah.
-- Navigasi memiliki tombol menu pada layar di bawah 768px. Menu dapat dibuka, ditutup dengan tombol Escape, atau ditutup setelah tautan dipilih.
-- Validasi form mengikuti urutan pada template modul. Hasil validasi ditampilkan pada satu area feedback.
-- Nama dibatasi 3 sampai 50 karakter, email mengikuti pola alamat email, semester harus berada pada rentang 1 sampai 14, dan minimal satu topik harus dipilih.
-- Pesan **“Form berhasil divalidasi.”** hanya berarti aturan sisi klien terpenuhi. Data tidak dikirim ke server atau disimpan.
+- P6 dikembangkan sebagai salinan P5 di direktori ini. Berkas artefak P5 tetap tidak diubah.
+- `index.php` menghasilkan judul, identitas, tahun, tipe data, perhitungan, kategori, dan daftar belajar menggunakan PHP di sisi peladen.
+- Contoh variabel dan tipe data meliputi string, integer, float, boolean, dan array. Operator aritmetika, perbandingan, logika, serta ternary ditampilkan bersama hasilnya.
+- Fungsi kategori semester menerapkan `if`, `elseif`, dan `else`, termasuk contoh nilai di luar rentang.
+- Pemetaan kode program studi menerapkan `switch` dan cabang `default`.
+- Daftar target belajar dihasilkan dengan `for`; daftar latihan dihasilkan dengan `while` yang berhenti setelah tiga iterasi.
+- Keluaran teks dinamis di-escape untuk konteks HTML.
+- Form dan JavaScript validasi dari P5 dipertahankan sebagai perilaku sisi browser. P6 tidak memproses atau menyimpan data form di PHP; pemrosesan form merupakan materi P7.
+- Permintaan favicon yang semula menghasilkan 404 saat pengujian browser diatasi dengan favicon data kosong.
 
 ## Cara Menjalankan
 
-Buka `index.html` di browser. Tidak diperlukan framework atau server.
+Pastikan PHP CLI tersedia. Dari direktori root repositori jalankan:
 
-## Pengujian
+```powershell
+php -S 127.0.0.1:8000 -t pertemuan-06
+```
 
-Pengujian dilakukan di browser pada viewport 375px dan 768px. Hasil aktual dicatat setelah setiap interaksi diuji.
+Buka `http://127.0.0.1:8000/` di browser. Untuk menghentikan server, tekan `Ctrl+C` pada terminal.
 
-### Navigasi
+Jika PHP Laragon belum ada di PATH, gunakan executable PHP Laragon, misalnya:
 
-- 375px, menu awal tertutup: diharapkan tautan tersembunyi; aktual sesuai. **Lulus.**
-- Tombol Menu diklik: diharapkan tautan tampil dan `aria-expanded` menjadi `true`; aktual sesuai. **Lulus.**
-- Tautan bagian dipilih: diharapkan halaman menuju bagian dan menu tertutup; aktual sesuai. **Lulus.**
-- Tombol Escape ditekan saat menu terbuka: diharapkan menu tertutup dan fokus kembali ke tombol; aktual sesuai. **Lulus.**
-- 768px: diharapkan tautan tampil dan tombol Menu tersembunyi; aktual sesuai. **Lulus.**
+```powershell
+C:\laragon\bin\php\php-8.3.33-Win32-vs16-x64\php.exe -S 127.0.0.1:8000 -t pertemuan-06
+```
 
-### Validasi Form
+Perintah lint dari root repositori:
 
-- Nama kosong: diharapkan ditolak dengan pesan aturan nama; aktual sesuai. **Lulus.**
-- Nama 2 karakter atau 51 karakter: diharapkan ditolak; aktual sesuai. **Lulus.**
-- Nama 3 atau 50 karakter: diharapkan diterima; aktual sesuai. **Lulus.**
-- Email kosong atau format salah: diharapkan ditolak; aktual sesuai. **Lulus.**
-- Semester kosong, 0, atau 15: diharapkan ditolak; aktual sesuai. **Lulus.**
-- Semester 1, 14, dan 1.5: diharapkan diterima sesuai pengecekan rentang pada template; aktual sesuai. **Lulus.**
-- Tanggal kunjungan kosong: diharapkan ditolak; aktual sesuai. **Lulus.**
-- Jenis pesan belum dipilih: diharapkan ditolak; aktual sesuai. **Lulus.**
-- Program studi belum dipilih: diharapkan ditolak; aktual sesuai. **Lulus.**
-- Tidak ada topik dipilih: diharapkan ditolak; aktual sesuai. **Lulus.**
-- Pesan kosong atau 301 karakter: diharapkan ditolak; aktual sesuai. **Lulus.**
-- Pesan 300 karakter: diharapkan diterima; aktual sesuai. **Lulus.**
-- Semua data wajib valid: diharapkan muncul pesan “Form berhasil divalidasi.” tanpa mengirim data; aktual sesuai dan halaman tidak berpindah. **Lulus.**
-- Tombol Batal setelah validasi gagal: diharapkan isian, pesan, dan penanda error dibersihkan; aktual sesuai. **Lulus.**
-- Input setelah feedback tampil: diharapkan feedback dikosongkan; aktual sesuai. **Lulus.**
+```powershell
+php -l pertemuan-06\index.php
+```
 
-## Debugging
+## Pengujian Aktual
 
-Setelah halaman dimuat ulang, JavaScript, CSS, dan gambar berhasil dimuat. Tidak ditemukan error console, error JavaScript, atau request aset yang gagal. Tidak ada perbaikan tambahan setelah pengujian.
+Pengujian dijalankan pada 22 Oktober 2026 dengan PHP 8.3.33 CLI dan server bawaan PHP. Server lokal yang diuji menggunakan `127.0.0.1:8076` (direktori dokumen `pertemuan-06`).
 
-Pemeriksaan sintaks `script.js` menggunakan Node.js v22.23.2 juga lulus (`node --check`).
+| Pemeriksaan | Hasil aktual |
+| --- | --- |
+| `php -l pertemuan-06\index.php` | Tidak ada kesalahan sintaks. |
+| Buka `/index.php` melalui server lokal | HTTP 200; judul, identitas, tahun, serta bagian PHP tampil. Tidak ditemukan pesan PHP Warning, Fatal error, Parse error, atau Notice pada keluaran. |
+| Tipe data dan operator | Ditampilkan string, int, float, bool, dan array; hitungan topik 3, semester berikutnya 5, progres 50%, dan rentang semester valid. |
+| `if - elseif - else` | Semester 0 dan 15 masuk kategori di luar rentang; semester 1 masuk tahap dasar; semester 4 tahap pengembangan; semester 7 tahap lanjutan. |
+| `switch` | Kode TI menghasilkan Teknik Informatika, SI menghasilkan Sistem Informasi, dan DKV menjalankan cabang default. |
+| Perulangan `for` | Menghasilkan tepat tiga target belajar. |
+| Perulangan `while` | Menghasilkan tepat tiga latihan, dari latihan ke-1 sampai ke-3, lalu berhenti. |
+| Aset halaman | `/style.css`, `/script.js`, dan `/img/foto-profil.jpg` masing-masing merespons HTTP 200. |
+| Browser desktop 1365 px | Layout grid lima baris tampil sesuai deklarasi; tombol navigasi mobile tersembunyi. |
+| Navigasi browser | Tombol Menu membuka navigasi dan menampilkan tautan Beranda, Tentang, dan Kontak. |
+
+### Debugging
+
+Pada pemuatan browser pertama, permintaan otomatis ke `/favicon.ico` menghasilkan HTTP 404. Favicon data kosong ditambahkan, lalu halaman dimuat ulang dan aset utama diperiksa kembali; tidak ada permintaan favicon yang gagal pada pengujian ulang. Seluruh uji keluaran PHP, cabang, loop, dan aset di atas dijalankan kembali dan lulus.
+
+## Pengelolaan Git
+
+Perubahan P6 dibuat bertahap dalam commit terpisah untuk kerangka PHP, tipe data dan operator, percabangan, tiap perulangan, tata letak, serta perbaikan debugging. Setiap tahap kode di-lint atau diuji pada keluaran yang relevan, lalu commit di-push ke branch `main`. Dokumentasi pengujian ini juga dikelola dalam commit tersendiri.
