@@ -48,6 +48,11 @@ function namaProgramStudi(string $kode): string
 $contohSemester = [0, 1, 4, 7, 15];
 $contohProgram = ['TI', 'SI', 'DKV'];
 $kodeProgram = 'TI';
+$targetBelajar = [
+    'Membuat halaman web dengan PHP',
+    'Mengolah variabel, tipe data, dan operator',
+    'Menggunakan percabangan dan perulangan',
+];
 ?>
 <!doctype html>
 <html lang="id">
@@ -140,6 +145,16 @@ $kodeProgram = 'TI';
                 <?php endforeach; ?>
             </ul>
             <p>Program studi profil: <?= e(namaProgramStudi($kodeProgram)) ?>.</p>
+        </section>
+
+        <section id="perulangan-for" class="panel">
+            <h2>Perulangan for</h2>
+            <p>Daftar target belajar dibuat oleh PHP menggunakan perulangan <code>for</code>.</p>
+            <ol>
+                <?php for ($index = 0; $index < count($targetBelajar); $index++): ?>
+                    <li><?= e($targetBelajar[$index]) ?></li>
+                <?php endfor; ?>
+            </ol>
         </section>
 
         <section id="contact" class="panel">
