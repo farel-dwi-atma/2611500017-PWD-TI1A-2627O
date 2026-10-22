@@ -92,6 +92,18 @@ $targetBelajar = [
             </article>
         </section>
 
+        <section id="biodata" class="panel">
+            <h2>Biodata Mahasiswa</h2>
+            <dl>
+                <dt>Nama</dt>
+                <dd><?= e($namaMahasiswa) ?></dd>
+                <dt>NIM</dt>
+                <dd><?= e(NIM_MAHASISWA) ?></dd>
+                <dt>Program Studi</dt>
+                <dd><?= e(namaProgramStudi($kodeProgram)) ?></dd>
+            </dl>
+        </section>
+
         <section id="data-php" class="panel">
             <h2>Variabel, Tipe Data, dan Operator PHP</h2>
             <p>PHP menggunakan variabel, tipe data, dan operator untuk membentuk halaman ini. Nilai variabel dan hasil perhitungannya digunakan di sisi peladen, tidak ditampilkan sebagai daftar data di halaman.</p>

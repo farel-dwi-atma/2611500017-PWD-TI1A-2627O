@@ -5,6 +5,7 @@
 - P6 dikembangkan sebagai salinan P5 di direktori ini. Berkas artefak P5 tetap tidak diubah.
 - `index.php` menghasilkan judul, identitas, tahun, tipe data, perhitungan, kategori, dan daftar belajar menggunakan PHP di sisi peladen.
 - PHP menggunakan variabel, tipe data, dan operator di sisi peladen; nilai variabel serta hasil perhitungan tidak ditampilkan sebagai data di halaman.
+- Biodata nama, NIM, dan program studi ditampilkan secara jelas pada bagian tersendiri.
 - Fungsi kategori semester menerapkan `if`, `elseif`, dan `else` untuk contoh semester 1, 4, dan 7.
 - Pemetaan kode program studi menerapkan `switch` dan cabang `default`.
 - Daftar target belajar dihasilkan dengan `for`; daftar latihan dihasilkan dengan `while` yang berhenti setelah tiga iterasi.
@@ -42,15 +43,16 @@ Pengujian dijalankan pada 22 Oktober 2026 dengan PHP 8.3.33 CLI dan server bawaa
 | Pemeriksaan | Hasil aktual |
 | --- | --- |
 | `php -l pertemuan-06\index.php` | Tidak ada kesalahan sintaks. |
-| Buka `/index.php` melalui server lokal | HTTP 200; judul, identitas, tahun, serta bagian PHP tampil. Tidak ditemukan pesan PHP Warning, Fatal error, Parse error, atau Notice pada keluaran. |
+| Buka `/index.php` melalui server lokal | HTTP 200; judul, biodata nama/NIM/program studi, tahun, serta bagian PHP tampil. Tidak ditemukan pesan PHP Warning, Fatal error, Parse error, atau Notice pada keluaran. |
 | Variabel, tipe data, dan operator | PHP menggunakan nilai di sisi peladen, tetapi nilai variabel dan hasil perhitungan tidak ditampilkan sebagai daftar data pada halaman. |
 | `if - elseif - else` | Semester 1 masuk tahap dasar; semester 4 tahap pengembangan; semester 7 tahap lanjutan. Tidak ada contoh sampai semester 15. |
 | `switch` | Kode TI menghasilkan Teknik Informatika, SI menghasilkan Sistem Informasi, dan DKV menjalankan cabang default. |
 | Perulangan `for` | Menghasilkan tepat tiga target belajar. |
 | Perulangan `while` | Menghasilkan tepat tiga latihan, dari latihan ke-1 sampai ke-3, lalu berhenti. |
 | Aset halaman | `/style.css`, `/script.js`, dan `/img/foto-profil.jpg` masing-masing merespons HTTP 200. |
-| Browser desktop 1365 px | Layout grid empat baris tampil sesuai deklarasi; tombol navigasi mobile tersembunyi. |
+| Browser desktop 1365 px | Layout grid lima baris tampil sesuai deklarasi; tombol navigasi mobile tersembunyi. |
 | Kontak dan GitHub | Form kontak tidak ada pada halaman; tautan profil GitHub tampil pada footer bersama informasi hak cipta. |
+| Biodata mahasiswa | Nama Farel Dwi Abdillah, NIM 2611500017, dan program studi Teknik Informatika tampil pada panel biodata. |
 | Navigasi browser | Tombol Menu membuka navigasi dan menampilkan tautan Beranda, Tentang, dan GitHub; tautan GitHub mengarahkan ke footer. |
 | Tampilan nilai variabel | Halaman tidak menampilkan daftar nilai/tipe, IPK, jumlah topik, semester berikutnya, atau hasil progres. |
 
