@@ -33,7 +33,21 @@ function kategoriSemester(int $semester): string
     }
 }
 
+function namaProgramStudi(string $kode): string
+{
+    switch ($kode) {
+        case 'TI':
+            return 'Teknik Informatika';
+        case 'SI':
+            return 'Sistem Informasi';
+        default:
+            return 'Program studi belum terdaftar';
+    }
+}
+
 $contohSemester = [0, 1, 4, 7, 15];
+$contohProgram = ['TI', 'SI', 'DKV'];
+$kodeProgram = 'TI';
 ?>
 <!doctype html>
 <html lang="id">
@@ -115,6 +129,17 @@ $contohSemester = [0, 1, 4, 7, 15];
                 <?php endforeach; ?>
             </ul>
             <p>Semester saya saat ini (<?= e((string) $semester) ?>): <?= e(kategoriSemester($semester)) ?>.</p>
+        </section>
+
+        <section id="switch" class="panel">
+            <h2>Percabangan switch</h2>
+            <p>Kode program studi dipetakan dengan <code>switch</code>, termasuk nilai bawaan.</p>
+            <ul>
+                <?php foreach ($contohProgram as $kode): ?>
+                    <li><?= e($kode) ?>: <?= e(namaProgramStudi($kode)) ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <p>Program studi profil: <?= e(namaProgramStudi($kodeProgram)) ?>.</p>
         </section>
 
         <section id="contact" class="panel">
