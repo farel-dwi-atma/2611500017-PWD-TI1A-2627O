@@ -1,16 +1,30 @@
+<?php
+declare(strict_types=1);
+
+const JUDUL_HALAMAN = 'Profil Mahasiswa';
+const NIM_MAHASISWA = '2611500017';
+
+$namaMahasiswa = 'Farel Dwi Abdillah';
+$tahunSekarang = date('Y');
+
+function e(string $value): string
+{
+    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+?>
 <!doctype html>
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profil Mahasiswa</title>
+    <title><?= e(JUDUL_HALAMAN) ?></title>
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
 </head>
 <body>
     <header class="site-header">
         <div class="container header-content">
-            <h1>Profil Mahasiswa</h1>
+            <h1><?= e(JUDUL_HALAMAN) ?></h1>
             <button class="nav-toggle" id="navToggle" type="button" aria-controls="navMenu"
                 aria-expanded="false" aria-label="Buka navigasi">Menu</button>
             <nav id="navMenu" aria-label="Navigasi utama">
@@ -26,7 +40,7 @@
     <main class="container main-grid">
         <section id="home" class="panel">
             <h2>Selamat Datang</h2>
-            <p>Halo, saya Farel Dwi Abdillah. Saya sedang mempelajari Pemrograman Web Dasar.</p>
+            <p>Halo, saya <?= e($namaMahasiswa) ?>. Saya sedang mempelajari Pemrograman Web Dasar.</p>
             <img class="profile-photo" src="img/foto-profil.jpg"
                 alt="Foto profil Farel Dwi Abdillah" width="175" height="175" />
         </section>
@@ -118,7 +132,7 @@
     </main>
 
     <footer class="site-footer">
-        <p>&copy; 2026 Farel Dwi Abdillah [2611500017]</p>
+        <p>&copy; <?= e($tahunSekarang) ?> <?= e($namaMahasiswa) ?> [<?= e(NIM_MAHASISWA) ?>]</p>
     </footer>
 </body>
 </html>
