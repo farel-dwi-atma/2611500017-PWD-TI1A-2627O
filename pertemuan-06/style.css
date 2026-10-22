@@ -218,10 +218,12 @@ button:focus-visible {
 
     #percabangan {
         grid-area: percabangan;
+        align-self: stretch;
     }
 
     #switch {
         grid-area: switch;
+        align-self: stretch;
     }
 
     #perulangan-for {

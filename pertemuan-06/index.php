@@ -106,7 +106,7 @@ $targetBelajar = [
 
         <section id="percabangan" class="panel">
             <h2>Percabangan if - elseif - else</h2>
-            <p>PHP mengelompokkan contoh semester 1 sampai 7 ke tahap belajar.</p>
+            <p>Semester ditentukan dengan percabangan <code>if</code>, <code>elseif</code>, dan <code>else</code>.</p>
             <ul>
                 <?php foreach ($contohSemester as $contoh): ?>
                     <li>Semester <?= e((string) $contoh) ?>: <?= e(kategoriSemester($contoh)) ?></li>
@@ -116,13 +116,12 @@ $targetBelajar = [
 
         <section id="switch" class="panel">
             <h2>Percabangan switch</h2>
-            <p>Kode program studi dipetakan dengan <code>switch</code>, termasuk nilai bawaan.</p>
+            <p>Program studi ditentukan dengan percabangan <code>switch</code>, termasuk cabang <code>default</code>.</p>
             <ul>
                 <?php foreach ($contohProgram as $kode): ?>
                     <li><?= e($kode) ?>: <?= e(namaProgramStudi($kode)) ?></li>
                 <?php endforeach; ?>
             </ul>
-            <p>Program studi profil: <?= e(namaProgramStudi($kodeProgram)) ?>.</p>
         </section>
 
         <section id="perulangan-for" class="panel">

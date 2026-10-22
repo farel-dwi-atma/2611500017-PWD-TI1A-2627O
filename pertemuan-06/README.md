@@ -6,6 +6,7 @@
 - `index.php` menghasilkan judul, biodata, kategori, dan daftar belajar menggunakan PHP di sisi peladen.
 - Biodata nama, NIM, dan program studi ditampilkan secara jelas pada bagian tersendiri.
 - Fungsi kategori semester menerapkan `if`, `elseif`, dan `else` untuk contoh semester 1, 4, dan 7.
+- Panel `if-elseif-else` dan `switch` memakai pola tampilan yang seragam: penjelasan singkat dan daftar hasil.
 - Pemetaan kode program studi menerapkan `switch` dan cabang `default`.
 - Daftar target belajar dihasilkan dengan `for`; daftar latihan dihasilkan dengan `while` yang berhenti setelah tiga iterasi.
 - Keluaran teks dinamis di-escape untuk konteks HTML.
