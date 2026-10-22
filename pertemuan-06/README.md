@@ -7,6 +7,7 @@
 - Biodata nama, NIM, dan program studi ditampilkan secara jelas pada bagian tersendiri.
 - Fungsi kategori semester menerapkan `if`, `elseif`, dan `else` untuk contoh semester 1, 4, dan 7.
 - Panel `if-elseif-else` dan `switch` memakai pola tampilan yang seragam: penjelasan singkat dan daftar hasil.
+- Panel perulangan `for` dan `while` direntangkan agar tingginya sama pada baris desktop.
 - Pemetaan kode program studi menerapkan `switch` dan cabang `default`.
 - Daftar target belajar dihasilkan dengan `for`; daftar latihan dihasilkan dengan `while` yang berhenti setelah tiga iterasi.
 - Keluaran teks dinamis di-escape untuk konteks HTML.
@@ -48,6 +49,7 @@ Pengujian dijalankan pada 22 Oktober 2026 dengan PHP 8.3.33 CLI dan server bawaa
 | `switch` | Kode TI menghasilkan Teknik Informatika, SI menghasilkan Sistem Informasi, dan DKV menjalankan cabang default. |
 | Perulangan `for` | Menghasilkan tepat tiga target belajar. |
 | Perulangan `while` | Menghasilkan tepat tiga latihan, dari latihan ke-1 sampai ke-3, lalu berhenti. |
+| Tampilan panel perulangan | Pada viewport desktop 1365 px, panel `for` dan `while` sama-sama setinggi 268 px. |
 | Aset halaman | `/style.css`, `/script.js`, dan `/img/foto-profil.jpg` masing-masing merespons HTTP 200. |
 | Browser desktop 1365 px | Layout grid empat baris tampil sesuai deklarasi; tombol navigasi mobile tersembunyi. |
 | Kontak dan GitHub | Form kontak tidak ada pada halaman; tautan profil GitHub tampil pada footer bersama informasi hak cipta. |

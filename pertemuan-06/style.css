@@ -228,10 +228,12 @@ button:focus-visible {
 
     #perulangan-for {
         grid-area: perulangan-for;
+        align-self: stretch;
     }
 
     #perulangan-while {
         grid-area: perulangan-while;
+        align-self: stretch;
     }
 
     .panel {
