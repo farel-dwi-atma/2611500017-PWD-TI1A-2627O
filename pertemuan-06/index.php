@@ -235,7 +235,7 @@ $targetBelajar = [
                         placeholder="Tulis pesan Anda" rows="5" required></textarea>
                 </div>
 
-                <p class="form-note">Form ini hanya divalidasi di browser. Data tidak dikirim atau disimpan.</p>
+                <p class="form-note">Form ini hanya memakai validasi sisi browser dari P5. P6 belum mengolah atau menyimpan data form dengan PHP.</p>
                 <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
 
                 <div class="button-group">
