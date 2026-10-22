@@ -104,11 +104,6 @@ $targetBelajar = [
             </dl>
         </section>
 
-        <section id="data-php" class="panel">
-            <h2>Variabel, Tipe Data, dan Operator PHP</h2>
-            <p>PHP menggunakan variabel, tipe data, dan operator untuk membentuk halaman ini. Nilai variabel dan hasil perhitungannya digunakan di sisi peladen, tidak ditampilkan sebagai daftar data di halaman.</p>
-        </section>
-
         <section id="percabangan" class="panel">
             <h2>Percabangan if - elseif - else</h2>
             <p>PHP mengelompokkan contoh semester 1 sampai 7 ke tahap belajar.</p>

@@ -197,7 +197,6 @@ button:focus-visible {
         grid-template-areas:
             "home about"
             "biodata biodata"
-            "data-php data-php"
             "percabangan switch"
             "perulangan-for perulangan-while";
         align-items: start;
@@ -215,10 +214,6 @@ button:focus-visible {
 
     #biodata {
         grid-area: biodata;
-    }
-
-    #data-php {
-        grid-area: data-php;
     }
 
     #percabangan {
