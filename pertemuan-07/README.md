@@ -6,6 +6,7 @@ P7 dikembangkan sebagai salinan terpisah dari artefak P6; file di `pertemuan-06/
 
 - PHP memvalidasi nama, email, semester, tanggal, jenis pesan, topik, program studi, dan pesan di sisi server.
 - Data yang dikirim ditampilkan kembali dengan escaping HTML. Isian form dipertahankan jika ada validasi yang gagal.
+- Setelah POST, halaman menggunakan pola Post/Redirect/Get dan menyimpan hasil sementara dalam session agar pengiriman ulang saat refresh tidak terjadi.
 - JavaScript digunakan untuk navigasi; pemrosesan form tetap berjalan di PHP tanpa bergantung pada JavaScript.
 - Input yang valid menampilkan ringkasan pesan. Input yang tidak valid menampilkan daftar kesalahan.
 
@@ -27,6 +28,7 @@ Pengujian aktual dijalankan pada 29 Oktober 2026 melalui Apache Laragon di local
 - Uji nama berisi markup HTML: markup ditampilkan sebagai teks ter-escape, bukan elemen HTML.
 - POST dengan data tidak valid: server menolak data dan menampilkan kesalahan untuk nama, email, semester, tanggal, jenis pesan, topik, program studi, dan pesan.
 - Batas panjang: nama 50 karakter Unicode dan pesan 300 karakter diterima; nama 51 karakter dan pesan 301 karakter ditolak.
+- Hasil POST hanya ditampilkan sekali setelah redirect; bentuk input yang tidak sesuai, seperti semester berbentuk array, ditolak tanpa warning PHP.
 - Respons POST valid dan tidak valid tidak menghasilkan warning, notice, atau fatal error PHP.
 
 ## Git/GitHub

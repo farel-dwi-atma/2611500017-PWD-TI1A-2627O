@@ -1,12 +1,14 @@
 <?php
 declare(strict_types=1);
 
+session_start();
+
 const NIM_MAHASISWA = "2611500017";
 const NAMA_MAHASISWA = "Farel Dwi Abdillah";
 const PROGRAM_STUDI = "TI";
 const TAHUN_AKADEMIK = "2026/2027";
 const NAMA_MATA_KULIAH = "Pemrograman Web Dasar";
-const PROFIL_GITHUB = "FarelD";
+const PROFIL_GITHUB = "farel-dwi-atma";
 
 function e(string $value): string
 {
@@ -19,9 +21,6 @@ function postString(string $key): string
 	return is_string($value) ? trim($value) : "";
 }
 
-$namaMahasiswa = NAMA_MAHASISWA;
-$programStudi = PROGRAM_STUDI;
-$tahunAkademik = TAHUN_AKADEMIK;
 $semester = 1;
 $ipk = 0.00;
 $statusAktif = true;
@@ -39,9 +38,9 @@ if ($semester < 3) {
 	$keteranganSemester = "Semester akhir";
 }
 
-$namaProdi = ($programStudi === "SI") ? "Sistem Informasi" : (($programStudi === "TI") ? "Teknik Informatika" : "Lainnya");
+$namaProdi = PROGRAM_STUDI === "SI" ? "Sistem Informasi" : (PROGRAM_STUDI === "TI" ? "Teknik Informatika" : "Lainnya");
 
-switch ($programStudi) {
+switch (PROGRAM_STUDI) {
 	case "SI":
 		$fokusProgramStudi = "Sistem informasi dan proses bisnis";
 		break;
@@ -52,7 +51,79 @@ switch ($programStudi) {
 		$fokusProgramStudi = "Belum ditentukan";
 }
 
-$formSubmitted = ($_SERVER["REQUEST_METHOD"] ?? "GET") === "POST";
+if (($_SERVER["REQUEST_METHOD"] ?? "GET") === "POST") {
+	$formData = [
+		"nama" => postString("nama"),
+		"email" => postString("email"),
+		"semester" => postString("semester"),
+		"tanggal" => postString("tanggal"),
+		"jenis_pesan" => postString("jenis_pesan"),
+		"minat" => [],
+		"prodi" => postString("prodi"),
+		"pesan" => postString("pesan"),
+	];
+	$formErrors = [];
+	$submittedInterests = $_POST["minat"] ?? [];
+
+	if (is_array($submittedInterests)) {
+		$formData["minat"] = array_values(array_unique(array_filter(
+			$submittedInterests,
+			static fn ($interest): bool => is_string($interest) && in_array($interest, ["HTML", "CSS"], true)
+		)));
+	} else {
+		$formErrors[] = "Format topik yang diminati tidak valid.";
+	}
+
+	$nameLength = mb_strlen($formData["nama"], "UTF-8");
+	if ($nameLength < 3 || $nameLength > 50) {
+		$formErrors[] = "Nama lengkap harus diisi 3 sampai 50 karakter.";
+	}
+	if (filter_var($formData["email"], FILTER_VALIDATE_EMAIL) === false) {
+		$formErrors[] = "Masukkan alamat email yang valid.";
+	}
+
+	$submittedSemester = filter_var($formData["semester"], FILTER_VALIDATE_INT);
+	if ($submittedSemester === false || $submittedSemester < 1 || $submittedSemester > 14) {
+		$formErrors[] = "Semester harus diisi dengan angka 1 sampai 14.";
+	}
+
+	$date = $formData["tanggal"];
+	$dateIsValid = preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) === 1
+		&& checkdate(
+			(int) substr($date, 5, 2),
+			(int) substr($date, 8, 2),
+			(int) substr($date, 0, 4)
+		);
+	if (!$dateIsValid) {
+		$formErrors[] = "Tanggal kunjungan tidak valid.";
+	}
+
+	if (!in_array($formData["jenis_pesan"], ["pertanyaan", "saran"], true)) {
+		$formErrors[] = "Pilih jenis pesan yang tersedia.";
+	}
+	if ($formData["minat"] === []) {
+		$formErrors[] = "Pilih minimal satu topik yang diminati.";
+	}
+	if (!in_array($formData["prodi"], ["SI", "TI"], true)) {
+		$formErrors[] = "Pilih program studi yang tersedia.";
+	}
+	$messageLength = mb_strlen($formData["pesan"], "UTF-8");
+	if ($messageLength < 1 || $messageLength > 300) {
+		$formErrors[] = "Pesan harus diisi dan maksimal 300 karakter.";
+	}
+
+	$_SESSION["formResult"] = [
+		"data" => $formData,
+		"errors" => $formErrors,
+	];
+
+	header("Location: index.php", true, 303);
+	exit;
+}
+
+$formResult = $_SESSION["formResult"] ?? null;
+unset($_SESSION["formResult"]);
+
 $formData = [
 	"nama" => "",
 	"email" => "",
@@ -65,76 +136,28 @@ $formData = [
 ];
 $formErrors = [];
 
-if ($formSubmitted) {
-	$formData["nama"] = postString("nama");
-	$formData["email"] = postString("email");
-	$formData["semester"] = postString("semester");
-	$formData["tanggal"] = postString("tanggal");
-	$formData["jenis_pesan"] = postString("jenis_pesan");
-	$formData["prodi"] = postString("prodi");
-	$formData["pesan"] = postString("pesan");
-
-	$submittedInterests = $_POST["minat"] ?? [];
-	if (is_array($submittedInterests)) {
-		$formData["minat"] = array_values(array_intersect(
-			array_filter($submittedInterests, "is_string"),
-			["HTML", "CSS"]
-		));
-	}
-
-	if (mb_strlen($formData["nama"], "UTF-8") < 3 || mb_strlen($formData["nama"], "UTF-8") > 50) {
-		$formErrors[] = "Nama lengkap harus diisi 3 sampai 50 karakter.";
-	}
-	if (!filter_var($formData["email"], FILTER_VALIDATE_EMAIL)) {
-		$formErrors[] = "Masukkan alamat email yang valid.";
-	}
-
-	$semesterForm = filter_var($formData["semester"], FILTER_VALIDATE_INT);
-	if ($semesterForm === false || $semesterForm < 1 || $semesterForm > 14) {
-		$formErrors[] = "Semester harus diisi dengan angka 1 sampai 14.";
-	}
-
-	$tanggalForm = $formData["tanggal"];
-	$tanggalValid = preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggalForm) === 1
-		&& checkdate(
-			(int) substr($tanggalForm, 5, 2),
-			(int) substr($tanggalForm, 8, 2),
-			(int) substr($tanggalForm, 0, 4)
-		);
-	if (!$tanggalValid) {
-		$formErrors[] = "Tanggal kunjungan tidak valid.";
-	}
-
-	if (!in_array($formData["jenis_pesan"], ["pertanyaan", "saran"], true)) {
-		$formErrors[] = "Pilih jenis pesan.";
-	}
-	if ($formData["minat"] === []) {
-		$formErrors[] = "Pilih minimal satu topik yang diminati.";
-	}
-	if (!in_array($formData["prodi"], ["SI", "TI"], true)) {
-		$formErrors[] = "Pilih program studi yang tersedia.";
-	}
-	if ($formData["pesan"] === "" || mb_strlen($formData["pesan"], "UTF-8") > 300) {
-		$formErrors[] = "Pesan harus diisi dan maksimal 300 karakter.";
-	}
+if (
+	is_array($formResult)
+	&& isset($formResult["data"], $formResult["errors"])
+	&& is_array($formResult["data"])
+	&& is_array($formResult["errors"])
+) {
+	$formData = array_merge($formData, $formResult["data"]);
+	$formErrors = $formResult["errors"];
 }
-
 ?>
 <!doctype html>
 <html lang="id">
-
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Profil Mahasiswa</title>
 	<link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 	<header>
 		<div class="header-top">
 			<h1>Profil Mahasiswa</h1>
-
 			<button
 				class="nav-toggle"
 				id="navToggle"
@@ -145,8 +168,7 @@ if ($formSubmitted) {
 				&#9776;
 			</button>
 		</div>
-
-		<nav>
+		<nav aria-label="Navigasi utama">
 			<ul id="navMenu">
 				<li><a href="#home">Beranda</a></li>
 				<li><a href="#about">Tentang</a></li>
@@ -158,32 +180,33 @@ if ($formSubmitted) {
 	<main>
 		<section id="home">
 			<h2>Selamat Datang</h2>
-			<p>Halo, saya <strong><?= e($namaMahasiswa) ?></strong>. Saya sedang mempelajari matakuliah <strong><?= e(NAMA_MATA_KULIAH) ?></strong> pada tahun akademik <?= e($tahunAkademik) ?>.</p>
-
-			<img src="img/foto-profil.jpg" alt="Foto profil <?= e($namaMahasiswa) ?>" />
+			<p>
+				Halo, saya <strong><?= e(NAMA_MAHASISWA) ?></strong>. Saya sedang mempelajari
+				matakuliah <strong><?= e(NAMA_MATA_KULIAH) ?></strong> pada tahun akademik
+				<?= e(TAHUN_AKADEMIK) ?>.
+			</p>
+			<img src="img/foto-profil.jpg" alt="Foto profil <?= e(NAMA_MAHASISWA) ?>" />
 		</section>
 
 		<section id="about">
 			<h2>Tentang Saya</h2>
-
 			<article>
 				<h3>Profil Singkat</h3>
-				<p>Program Studi: <?= e($namaProdi . " (" . $programStudi . ")") ?></p>
+				<p>Program Studi: <?= e($namaProdi . " (" . PROGRAM_STUDI . ")") ?></p>
 				<p>Fokus program studi: <?= e($fokusProgramStudi) ?></p>
 				<p>Status mahasiswa: <?= $statusAktif ? "Aktif" : "Tidak aktif" ?></p>
 				<p>Semester: <?= $semester ?> (<?= e($keteranganSemester) ?>)</p>
 				<p>Sisa semester hingga batas: <?= $sisaSemester ?></p>
 				<p>Pemeriksaan rentang semester: <?= e($statusSemester) ?></p>
-				<p>IPK: <?= number_format($ipk, 2, ',', '.') ?></p>
+				<p>IPK: <?= number_format($ipk, 2, ",", ".") ?></p>
 				<p>Catatan tambahan: <?= e($catatanTambahan ?? "Belum ada") ?></p>
 
 				<h3>Target Belajar (Perulangan for)</h3>
 				<ol>
 					<?php
-					// Perulangan for tanpa array; materi larik dibahas pada P9.
-					for ($i = 1; $i <= 5; $i++) {
-						echo "<li>Target belajar ke-" . $i . ": ";
-						switch ($i) {
+					for ($index = 1; $index <= 5; $index++) {
+						echo "<li>Target belajar ke-" . $index . ": ";
+						switch ($index) {
 							case 1:
 								echo "Memahami sintaks dasar PHP.";
 								break;
@@ -198,20 +221,19 @@ if ($formSubmitted) {
 								break;
 							default:
 								echo "Belum dipetakan";
-								break;
 						}
 						echo "</li>";
 					}
 					?>
 				</ol>
 
-				<h3>Semester (Perulangan while):</h3>
+				<h3>Semester (Perulangan while)</h3>
 				<ol>
 					<?php
 					$nomorSemester = 1;
 					while ($nomorSemester <= 3) {
 						echo "<li>Semester " . $nomorSemester . "</li>";
-						$nomorSemester++; // operator penugasan
+						$nomorSemester++;
 					}
 					?>
 				</ol>
@@ -220,14 +242,20 @@ if ($formSubmitted) {
 
 		<section id="contact">
 			<h2>Kontak</h2>
-
 			<p>
 				Kunjungi
-				<a target="_blank" rel="noopener noreferrer" href="https://github.com/<?= e(PROFIL_GITHUB) ?>">profil GitHub saya</a>.
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href="https://github.com/<?= e(PROFIL_GITHUB) ?>">profil GitHub saya</a>.
 			</p>
 
-			<?php if ($formSubmitted): ?>
-				<div id="formResult" class="<?= $formErrors === [] ? "form-feedback-success" : "form-feedback-error" ?>" role="status" aria-live="polite">
+			<?php if ($formResult !== null): ?>
+				<div
+					id="formResult"
+					class="<?= $formErrors === [] ? "form-feedback-success" : "form-feedback-error" ?>"
+					role="status"
+					aria-live="polite">
 					<?php if ($formErrors === []): ?>
 						<h3>Pesan berhasil diproses</h3>
 						<p>Terima kasih, <?= e($formData["nama"]) ?>. Berikut ringkasan pesan Anda:</p>
@@ -254,7 +282,6 @@ if ($formSubmitted) {
 			<form id="contactForm" action="index.php" method="post">
 				<div class="form-group">
 					<label for="nama">Nama Lengkap</label><br />
-
 					<input
 						class="input-form"
 						type="text"
@@ -269,45 +296,80 @@ if ($formSubmitted) {
 
 				<div class="form-group">
 					<label for="email">Email</label><br />
-
-					<input class="input-form" type="email" id="email" name="email" placeholder="nama@email.com" value="<?= e($formData["email"]) ?>" required />
+					<input
+						class="input-form"
+						type="email"
+						id="email"
+						name="email"
+						placeholder="nama@email.com"
+						value="<?= e($formData["email"]) ?>"
+						required />
 				</div>
 
 				<div class="form-group">
 					<label for="semester">Semester</label><br />
-
-					<input class="input-form" type="number" id="semester" name="semester" min="1" max="14" step="1" value="<?= e($formData["semester"]) ?>" required />
+					<input
+						class="input-form"
+						type="number"
+						id="semester"
+						name="semester"
+						min="1"
+						max="14"
+						step="1"
+						value="<?= e($formData["semester"]) ?>"
+						required />
 				</div>
 
 				<div class="form-group">
 					<label for="tanggal">Tanggal Kunjungan</label><br />
-
-					<input class="input-form" type="date" id="tanggal" name="tanggal" value="<?= e($formData["tanggal"]) ?>" required />
+					<input
+						class="input-form"
+						type="date"
+						id="tanggal"
+						name="tanggal"
+						value="<?= e($formData["tanggal"]) ?>"
+						required />
 				</div>
 
 				<div class="form-group">
 					<p>Jenis Pesan</p>
-
-					<input type="radio" id="pertanyaan" name="jenis_pesan" value="pertanyaan" <?= $formData["jenis_pesan"] === "pertanyaan" ? "checked" : "" ?> required />
+					<input
+						type="radio"
+						id="pertanyaan"
+						name="jenis_pesan"
+						value="pertanyaan"
+						<?= $formData["jenis_pesan"] === "pertanyaan" ? "checked" : "" ?>
+						required />
 					<label for="pertanyaan">Pertanyaan</label>
-
-					<input type="radio" id="saran" name="jenis_pesan" value="saran" <?= $formData["jenis_pesan"] === "saran" ? "checked" : "" ?> />
+					<input
+						type="radio"
+						id="saran"
+						name="jenis_pesan"
+						value="saran"
+						<?= $formData["jenis_pesan"] === "saran" ? "checked" : "" ?> />
 					<label for="saran">Saran</label>
 				</div>
 
 				<div class="form-group">
 					<p>Topik yang Diminati</p>
-
-					<input type="checkbox" id="minat-html" name="minat[]" value="HTML" <?= in_array("HTML", $formData["minat"], true) ? "checked" : "" ?> />
+					<input
+						type="checkbox"
+						id="minat-html"
+						name="minat[]"
+						value="HTML"
+						<?= in_array("HTML", $formData["minat"], true) ? "checked" : "" ?> />
 					<label for="minat-html">HTML</label>
-
-					<input type="checkbox" id="minat-css" name="minat[]" value="CSS" <?= in_array("CSS", $formData["minat"], true) ? "checked" : "" ?> />
+					<input
+						type="checkbox"
+						id="minat-css"
+						name="minat[]"
+						value="CSS"
+						<?= in_array("CSS", $formData["minat"], true) ? "checked" : "" ?> />
 					<label for="minat-css">CSS</label>
 				</div>
 
 				<div class="form-group">
 					<label for="prodi">Program Studi</label><br />
-
 					<select class="input-form" id="prodi" name="prodi" required>
 						<option value="">-- Pilih Program Studi --</option>
 						<option value="SI" <?= $formData["prodi"] === "SI" ? "selected" : "" ?>>Sistem Informasi</option>
@@ -317,7 +379,6 @@ if ($formSubmitted) {
 
 				<div class="form-group">
 					<label for="pesan">Pesan</label><br />
-
 					<textarea
 						class="input-form"
 						id="pesan"
@@ -330,15 +391,13 @@ if ($formSubmitted) {
 
 				<button type="submit">Kirim</button>
 				<button type="reset">Batal</button>
-				<p id="formFeedback"></p>
 			</form>
 		</section>
 	</main>
 
 	<footer>
-		<p>&copy; <?= date("Y") ?> <?= e($namaMahasiswa) ?> [<?= e(NIM_MAHASISWA) ?>]</p>
+		<p>&copy; <?= date("Y") ?> <?= e(NAMA_MAHASISWA) ?> [<?= e(NIM_MAHASISWA) ?>]</p>
 	</footer>
 	<script src="script.js"></script>
 </body>
-
 </html>
