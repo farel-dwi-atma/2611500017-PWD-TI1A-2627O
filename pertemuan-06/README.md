@@ -4,15 +4,6 @@
 
 Halaman profil menggunakan PHP untuk menampilkan biodata dan contoh percabangan `if-elseif-else`, `switch`, serta perulangan `for` dan `while`. Form belum disertakan karena akan dipelajari pada P7. Artefak P5 tetap tidak diubah.
 
-## Cara Menjalankan
-
-Dari folder utama proyek, jalankan:
-
-```powershell
-php -S 127.0.0.1:8000 -t pertemuan-06
-```
-
-Buka `http://127.0.0.1:8000/` di browser. Tekan `Ctrl+C` untuk menghentikan server.
 
 ## Hasil Pengujian
 
