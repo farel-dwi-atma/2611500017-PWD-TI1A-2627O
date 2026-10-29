@@ -126,11 +126,6 @@ for ($i = 1; $i <= 5; $i++) {
     }
     echo "</li>";
 } ?>
-
-Pemrograman Web Dasar (IS205) | Pertemuan 7
-
-Modul P7 - PWD OBE 2026/2027 Gasal v2.0 | Halaman 22 | Yohanes Setiawan Japriadi
-</ol>
 <h3>Semester (Perulangan while):</h3>
 <ol>
 <?php
@@ -187,10 +182,6 @@ required />
 </div>
 <div class="form-group">
 <p>Topik yang Diminati</p>
-
-Pemrograman Web Dasar (IS205) | Pertemuan 7
-
-Modul P7 - PWD OBE 2026/2027 Gasal v2.0 | Halaman 23 | Yohanes Setiawan Japriadi
 <input type="checkbox" id="minat-html" name="minat" value="HTML" />
 <label for="minat-html">HTML</label>
 <input type="checkbox" id="minat-css" name="minat" value="CSS" />
