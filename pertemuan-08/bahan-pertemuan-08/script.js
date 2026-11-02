@@ -13,6 +13,67 @@ if (navToggle && navMenu) {
   });
 }
 
+// Validasi formulir Rencana Kegiatan.
+const activityForm = document.querySelector('form[data-validation="activity"]');
+
+if (activityForm) {
+  const activityFeedback = activityForm.querySelector("[data-activity-feedback]");
+  const activityFields = [
+    activityForm.elements.namedItem("nama_kegiatan"),
+    activityForm.elements.namedItem("kategori_kegiatan"),
+    activityForm.elements.namedItem("tanggal_pelaksanaan"),
+    activityForm.elements.namedItem("lokasi_kegiatan"),
+    activityForm.elements.namedItem("deskripsi_kegiatan"),
+  ];
+
+  activityForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const [nama, kategori, tanggal, lokasi, deskripsi] = activityFields;
+    const errors = [];
+
+    if (nama.value.trim().length < 3 || nama.value.trim().length > 100) {
+      errors.push("Nama kegiatan harus berisi 3 sampai 100 karakter.");
+    }
+    if (!kategori.value) {
+      errors.push("Pilih kategori kegiatan.");
+    }
+    if (!tanggal.value || !tanggal.validity.valid) {
+      errors.push("Masukkan tanggal pelaksanaan yang valid.");
+    }
+    if (lokasi.value.trim().length < 2 || lokasi.value.trim().length > 100) {
+      errors.push("Lokasi kegiatan harus berisi 2 sampai 100 karakter.");
+    }
+    if (deskripsi.value.trim().length < 10 || deskripsi.value.trim().length > 500) {
+      errors.push("Deskripsi kegiatan harus berisi 10 sampai 500 karakter.");
+    }
+
+    if (errors.length > 0) {
+      if (activityFeedback) {
+        activityFeedback.textContent = errors.join(" ");
+        activityFeedback.className = "form-feedback-error";
+      }
+      return;
+    }
+
+    HTMLFormElement.prototype.submit.call(activityForm);
+  });
+
+  activityForm.addEventListener("reset", () => {
+    if (activityFeedback) {
+      activityFeedback.textContent = "";
+      activityFeedback.className = "form-feedback";
+    }
+  });
+
+  activityForm.addEventListener("input", () => {
+    if (activityFeedback) {
+      activityFeedback.textContent = "";
+      activityFeedback.className = "form-feedback";
+    }
+  });
+}
+
 // Validasi formulir Kontak.
 // Selector menggunakan atribut/class, bukan ID formulir tertentu,
 // sehingga formulir lain dapat ditambahkan dengan ID yang berbeda.
