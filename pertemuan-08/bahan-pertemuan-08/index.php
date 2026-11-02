@@ -102,7 +102,7 @@ switch ($programStudi) {
 			</button>
 		</div>
 
-		<nav id="rencana-kegiatan">
+		<nav>
 			<ul id="navMenu">
 				<li><a href="#home">Beranda</a></li>
 				<li><a href="#about">Tentang</a></li>
